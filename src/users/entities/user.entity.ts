@@ -1,22 +1,25 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class Project {
+export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column('varchar', {
     length: 50,
   })
-  projectCode: string;
+  userName: string;
 
   @Column('varchar', {
-    length: 100,
+    length: 50,
   })
-  projectDescription: string;
+  firstName: string;
 
   @Column('varchar', {
-    length: 20,
+    length: 50,
   })
-  projectTask: string;
+  lastName: string;
+
+  @Column('tinyint')
+  isActive: boolean;
 }
