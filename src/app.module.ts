@@ -1,12 +1,15 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProjectsModule } from './projects/projects.module';
 import { TasksModule } from './tasks/tasks.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
-import { User } from './users/entities/user.entity';
+import { JeModule } from './je/je.module';
 import { Project } from './projects/entities/project.entity';
+import { Task } from './tasks/entities/task.entity';
+import { User } from './users/entities/user.entity';
+import { Je } from './je/entities/je.entity';
 
 @Module({
   imports: [
@@ -20,9 +23,10 @@ import { Project } from './projects/entities/project.entity';
       username: 'application',
       password: 'application',
       database: 'workflow',
-      entities: [User, Project],
+      entities: [User, Project, Task, Je],
       synchronize: true,
     }),
+    JeModule,
   ],
   controllers: [AppController],
   providers: [AppService],
