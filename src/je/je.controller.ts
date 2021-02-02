@@ -10,15 +10,17 @@ import {
 import { JeService } from './je.service';
 import { CreateJeDto } from './dto/create-je.dto';
 import { UpdateJeDto } from './dto/update-je.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('api')
 @Controller('je')
 export class JeController {
   constructor(private readonly jeService: JeService) {}
 
-  // @Post()
-  // create(@Body() createJeDto: CreateJeDto) {
-  //   return this.jeService.create(createJeDto);
-  // }
+  @Post()
+  create(@Body() createJeDto: CreateJeDto) {
+    return this.jeService.create(createJeDto);
+  }
 
   @Get()
   findAll() {
@@ -30,10 +32,10 @@ export class JeController {
     return this.jeService.findOne(id);
   }
 
-  // @Put(':id')
-  // update(@Param('id') id: string, @Body() updateJeDto: UpdateJeDto) {
-  //   return this.jeService.update(id, updateJeDto);
-  // }
+  @Put(':id')
+  update(@Param('id') id: string, @Body() updateJeDto: UpdateJeDto) {
+    return this.jeService.update(id, updateJeDto);
+  }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
