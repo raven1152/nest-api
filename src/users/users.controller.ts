@@ -35,6 +35,11 @@ export class UsersController {
     return this.usersService.findOne(id);
   }
 
+  @Get('like/:stuff')
+  findLike(@Param('stuff') stuff: string) {
+    return this.usersService.findStuff(stuff);
+  }
+
   @Put(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(id, updateUserDto);

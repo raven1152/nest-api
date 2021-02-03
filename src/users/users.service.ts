@@ -2,8 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { FindManyOptions, getCustomRepository, In, Like, Repository } from 'typeorm';
 import { User } from './entities/user.entity';
+import { UsersRepository } from './users.repository';
 
 @Injectable()
 export class UsersService {
@@ -28,6 +29,18 @@ export class UsersService {
 
   findOne(id: string) {
     return this.userRepository.findOne(id);
+  }
+
+  findStuff(stuff: string) {
+    const usersRepository: UsersRepository = getCustomRepository(
+      UsersRepository,
+    );
+    try {
+      return usersRepository.findStuff(stuff);
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
   }
 
   update(id: string, updateUserDto: UpdateUserDto) {
