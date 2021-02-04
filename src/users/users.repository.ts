@@ -5,8 +5,15 @@ import { EntityRepository, Like, Repository } from 'typeorm';
 export class UsersRepository extends Repository<User> {
   findStuff(stuff: string) {
     return this.find({
-      lastName: Like(`%${stuff}%`),
-      firstName: Like(`%${stuff}%`)
+      // this structure yields an OR condition between the two like statements
+      where: [
+        {
+          lastName: Like(`%${stuff}%`),
+        },
+        {
+          firstName: Like(`%${stuff}%`),
+        },
+      ],
     });
   }
 }

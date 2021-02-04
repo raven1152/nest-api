@@ -41,4 +41,9 @@ export class JeController {
   remove(@Param('id') id: string) {
     return this.jeService.remove(id);
   }
+
+  @Get('days/:fromDate/:toDate')
+  getDays(@Param('fromDate') fromDate: Date, @Param('toDate') toDate: Date) {
+    return this.jeService.getDays(fromDate, toDate);
+  }
 }

@@ -3,7 +3,8 @@ import { CreateJeDto } from './dto/create-je.dto';
 import { UpdateJeDto } from './dto/update-je.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Je } from './entities/je.entity';
-import { Repository } from 'typeorm';
+import { getCustomRepository, Repository } from 'typeorm';
+import { JeRepository } from './je.repository';
 
 @Injectable()
 export class JeService {
@@ -43,5 +44,15 @@ export class JeService {
 
   remove(id: string) {
     return this.jeRepository.delete(id);
+  }
+
+  getDays(fromDate: Date, toDate: Date) {
+    const jeRepository: JeRepository = getCustomRepository(JeRepository);
+    try {
+      return jeRepository.getDays(fromDate, toDate);
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
   }
 }
