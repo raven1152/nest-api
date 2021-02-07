@@ -49,7 +49,7 @@ export class JeService {
   getDays(fromDate: Date, toDate: Date) {
     const jeRepository: JeRepository = getCustomRepository(JeRepository);
     try {
-      return jeRepository.getDays(fromDate, toDate);
+      return jeRepository.getDaysEx(fromDate, toDate);
     } catch (e) {
       console.log(e);
       throw e;
