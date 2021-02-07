@@ -2,7 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindManyOptions, getCustomRepository, In, Like, Repository } from 'typeorm';
+import {
+  FindManyOptions,
+  getCustomRepository,
+  In,
+  Like,
+  Repository,
+} from 'typeorm';
 import { User } from './entities/user.entity';
 import { UsersRepository } from './users.repository';
 
@@ -41,6 +47,28 @@ export class UsersService {
       console.log(e);
       throw e;
     }
+  }
+
+  findMoreStuff() {
+    const usersRepository: UsersRepository = getCustomRepository(
+      UsersRepository,
+    );
+
+    const options = {
+      select: ['firstName', 'lastName'],
+      where: {
+        firstName: 'Timber',
+        lastName: 'Saw',
+      },
+      order: {
+        id: 'DESC',
+      },
+      skip: 5,
+      take: 10,
+      cache: true,
+    } as FindManyOptions<User>;
+
+    return usersRepository.find(options);
   }
 
   update(id: string, updateUserDto: UpdateUserDto) {
