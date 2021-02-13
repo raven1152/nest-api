@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { FindManyOptions, Repository } from 'typeorm';
 import { Task } from './entities/task.entity';
 
 @Injectable()
@@ -23,7 +23,11 @@ export class TasksService {
   }
 
   findAll() {
-    return this.taskRepository.find();
+    const options = {
+      relations: ['project', 'sprint'],
+    } as FindManyOptions;
+
+    return this.taskRepository.find(options);
   }
 
   findOne(id: string) {

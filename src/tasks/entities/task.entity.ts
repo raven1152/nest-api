@@ -6,6 +6,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { Project } from '../../projects/entities/project.entity';
+import { Sprint } from '../../sprints/entities/sprint.entity';
 
 @Entity()
 export class Task {
@@ -26,4 +27,8 @@ export class Task {
   @ManyToOne(() => Project)
   @JoinColumn()
   project: Project;
+
+  @ManyToOne(() => Sprint)
+  @JoinColumn()
+  sprint: Sprint;
 }
