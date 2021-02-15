@@ -23,11 +23,7 @@ export class SprintsService {
   }
 
   findAll() {
-    const options = {
-      relations: ['tasks'],
-    } as FindManyOptions;
-
-    return this.sprintRepository.find(options);
+    return this.sprintRepository.find();
   }
 
   findOne(id: string) {
